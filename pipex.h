@@ -26,17 +26,17 @@
 
 typedef struct s_vars
 {
-	int			fd[2];
-	int			infile;
-	int			outfile;
-	int			pid1;
-	int			pid;
+	int		fd[2];
+	int		infile;
+	int		outfile;
+	int		pid1;
+	int		pid;
 	char		*c_path;
 	char		**env;
 }	t_vars;
 
 char	**getpath(char **env);
-int		check_access(char *join3);
+int	check_access(char *join3);
 char	*get_command_path(char *cmd, char **env_paths);
 
 #endif
