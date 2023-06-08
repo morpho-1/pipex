@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aylemrab <aylemrab@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/07 10:17:34 by aylemrab          #+#    #+#              #
+#    Updated: 2023/06/08 10:36:37 by aylemrab         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = pipex
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = pipex.c utils.c
 
@@ -10,22 +22,22 @@ OBJS = $(SRCS:.c=.o)
 
 all:$(NAME)
 
-libft/libft.a:
-	make -C libft
+libft_tools/libft.a:
+	make -C libft_tools
 
-%.o:%.c pipex.h libft/libft.h
-	$(CC) $(CFLAGS) -c $<
+%.o:%.c pipex.h libft_tools/libft.h
+	@$(CC) $(CFLAGS) -c $<
 
-$(NAME):$(OBJS) libft/libft.a
-	$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) 
+$(NAME):$(OBJS) libft_tools/libft.a
+	@$(CC) $(CFLAGS) $(OBJS) libft_tools/libft.a -o $(NAME) 
 
 clean:
-	rm -f $(OBJS) $(BONUSOBJS)
-	make clean -C libft
+	@rm -f $(OBJS)
+	@make clean -C libft_tools
 
 fclean: clean 
-	rm -f $(NAME)
-	make fclean -C libft
+	@rm -f $(NAME)
+	@make fclean -C libft_tools
 
 re: fclean all 
 
