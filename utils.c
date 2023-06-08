@@ -6,18 +6,18 @@
 /*   By: aylemrab <aylemrab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 02:08:25 by aylemrab          #+#    #+#             */
-/*   Updated: 2023/06/03 02:13:54 by aylemrab         ###   ########.fr       */
+/*   Updated: 2023/06/08 10:38:18 by aylemrab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	check_access(char *join3)
+int	check_access(char *join)
 {
 	int	t_access;
 
 	t_access = 0;
-	t_access = access(join3, X_OK | F_OK);
+	t_access = access(join, X_OK);
 	return (t_access);
 }
 
@@ -45,8 +45,13 @@ char	*get_command_path(char *cmd, char **env_paths)
 	path = NULL;
 	if (env_paths == NULL || !cmd)
 		return (NULL);
-	if (check_access(cmd) == 0)
-		return (cmd);
+	if (ft_strchr(cmd, '/'))
+	{	
+		if (check_access(cmd) == 0)
+			return (cmd);
+		else
+			return (NULL);
+	}
 	join_command = ft_strjoin("/", cmd);
 	while (*env_paths)
 	{
